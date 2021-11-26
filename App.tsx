@@ -8,7 +8,7 @@ import Game from "./app/screens/Game";
 
 const Stack = createNativeStackNavigator();
 
-export default function App() {
+const App = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Login">
@@ -17,7 +17,9 @@ export default function App() {
       </Stack.Navigator>
     </NavigationContainer>
   );
-}
+};
+
+export default App;
 
 const styles = StyleSheet.create({
   container: {
