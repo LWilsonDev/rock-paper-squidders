@@ -1,27 +1,22 @@
-import React, {useState} from "react";
-import {
-  View,
-  Text,
-  TextInput,
-  Button,
-  Alert,
-  ActivityIndicator,
-  StyleSheet,
-} from "react-native";
-import Constants from "expo-constants";
+import React from 'react';
+import {StyleSheet} from 'react-native';
+import {Text, Box} from '../components/ThemeComponents';
+import SignInForm from '../components/SignInForm';
 
-import Pusher from "pusher-js/react-native";
-
-const Login = () => {
-  const [username, setUsername] = useState<string>("");
-  const [isLoading, setIsLoading] = useState<boolean>(false);
-  const PUSHER_API_KEY = Constants.manifest?.extra?.pusherApiKey;
-  const APP_CLUSTER = Constants.manifest?.extra?.appClusterApiKey;
+const Login = ({navigation}: any) => {
+  function onSuccess() {
+    navigation.navigate('Lobby');
+  }
 
   return (
-    <View>
-      <Text>LOGIN</Text>
-    </View>
+    <Box>
+      <Text variant="header">Welcome</Text>
+      <Text variant="body">
+        Set a username so your friends will recognize you, or stay anonymous...
+      </Text>
+
+      <SignInForm onSuccess={onSuccess} />
+    </Box>
   );
 };
 

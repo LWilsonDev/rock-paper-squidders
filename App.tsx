@@ -1,21 +1,23 @@
-import {StatusBar} from "expo-status-bar";
-import React from "react";
-import {StyleSheet, Text, View} from "react-native";
-import {NavigationContainer} from "@react-navigation/native";
-import {createNativeStackNavigator} from "@react-navigation/native-stack";
-import Login from "./app/screens/Login";
-import Game from "./app/screens/Game";
-
-const Stack = createNativeStackNavigator();
+import React from 'react';
+import {StyleSheet} from 'react-native';
+import {ThemeProvider} from '@shopify/restyle';
+import theme from './theme';
+import Firebase, {FirebaseContext} from './app/components/Firebase';
+import {store} from './app/store/store';
+import {Provider} from 'react-redux';
+import AppInner from './AppInner';
 
 const App = () => {
+  const firebase = new Firebase();
+
   return (
-    <NavigationContainer>
-      <Stack.Navigator initialRouteName="Login">
-        <Stack.Screen name="Login" component={Login} />
-        <Stack.Screen name="Game" component={Game} />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <FirebaseContext.Provider value={firebase}>
+      <Provider store={store}>
+        <ThemeProvider theme={theme}>
+          <AppInner />
+        </ThemeProvider>
+      </Provider>
+    </FirebaseContext.Provider>
   );
 };
 
@@ -24,8 +26,8 @@ export default App;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 });
